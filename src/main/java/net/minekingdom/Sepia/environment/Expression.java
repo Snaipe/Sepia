@@ -124,8 +124,6 @@ public class Expression {
         int lastLeftParenthesis = 0;
         main:
         for ( int i = 0; i < expr.length(); i++ ) {
-            System.out.println(expr.charAt(i));
-            
             if (Character.isDigit(expr.charAt(i))) {
                 int size = 0;
                 while (i + ++size < expr.length() && (isAlphaNumeric(expr.charAt(i + size)) || expr.charAt(i + size) == '.'));
@@ -277,7 +275,8 @@ public class Expression {
             if ( (result.isEmpty() || last instanceof Operator) 
                     && !(o instanceof Addition.Unary) 
                     && !(o instanceof Subtraction.Unary)
-                    && !(o instanceof ArrayBuilder)) {
+                    && !(o instanceof ArrayBuilder)
+                    && !(o instanceof Grouping.LeftParenthesis)) {
                 throw new ParseException("Syntax error on token \"" + o + "\", delete this token", index);
             }
             
